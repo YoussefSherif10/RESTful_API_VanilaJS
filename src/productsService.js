@@ -1,41 +1,49 @@
 // Import the necessary dependencies
-const lodash = require("lodash");
 const productsList = require("./products.json").products;
 
 
 const getProducts = () => {
-  // get all products
+    return JSON.stringify(productsList);
 }
 
 const getProductsById = (productId, done) => {
-  let product = null
-
-  // get a product by ID
-
-  return done(null, JSON.stringify(product));
+    let product = productsList.find(p => p.id === productId);
+    if (!product)
+        return done('Requested product doesn\'t exist..!');
+    return done(null, JSON.stringify(product));
 }
 
 const saveProduct = (newProduct, done) => {
- // save a product
-  return done(null, JSON.stringify(productsList));
+    let entry = productsList.find(p => p.id === newProduct.id);
+    if (!entry)
+        return done('Product already exists..!');
+    productsList.push(newProduct);
+    return done(null, JSON.stringify(productsList));
 }
 
 const updateProduct = (productId, updateData, done) => {
-  let updatedProductList = null;
-  // update the product list
-  done(null, JSON.stringify(updatedProductList));
+    let index = productsList.findIndex(p => p.id === productId);
+    if (index === -1)
+        done('Requested product doesn\'t exist..!');
+
+    let newObj = {...productsList[index], updateData};
+    let updatedProductList = productsList.splice(index, 1, newObj);
+    done(null, JSON.stringify(updatedProductList));
 }
 
 const deleteProduct = (productId, done) => {
-  // delete a product    
-  done(null, JSON.stringify(productsList));
+    let index = productsList.findIndex(p => p.id === productId);
+    if (index === -1)
+        done('Requested product doesn\'t exist..!');
+
+    done(null, JSON.stringify(productsList.splice(index, 1)));
 }
 
 
 module.exports = {
-  getProducts,
-  getProductsById,
-  saveProduct,
-  updateProduct,
-  deleteProduct
+    getProducts,
+    getProductsById,
+    saveProduct,
+    updateProduct,
+    deleteProduct
 }
