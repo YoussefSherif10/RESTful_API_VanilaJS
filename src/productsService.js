@@ -28,16 +28,14 @@ const saveProduct = (newProduct, done) => {
 }
 
 const updateProduct = (productId, updateData, done) => {
-    let index = productsList.find(p => p.id === productId);
-    if (!index) {
+    let index = productsList.findIndex(p => p.id === productId);
+    if (index === -1) {
         done('Requested product doesn\'t exist..!');
         return null;
     }
 
-    let newobj = JSON.parse(updateData);
 
-    index = {"id": productId};
-    index += updateData;
+    productsList.splice(index, 1, updateData);
     done(null, JSON.stringify(productsList));
     return JSON.stringify(productsList)
 }
@@ -49,8 +47,9 @@ const deleteProduct = (productId, done) => {
         return null;
     }
 
-    done(null, JSON.stringify(productsList.splice(index, 1)));
-    return JSON.stringify(productsList.splice(index, 1));
+    productsList.splice(index, 1);
+    done(null, JSON.stringify(productsList));
+    return JSON.stringify(productsList);
 }
 
 

@@ -76,6 +76,7 @@ describe("Testing productService methods", function () {
 
   it("Test update product with valid productId", function (done) {
     let updateData = {
+      "id": 3,
       "name": "Mobile",
       "description": "A mobile to operate",
       "price": 100000,
