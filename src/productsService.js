@@ -8,35 +8,49 @@ const getProducts = () => {
 
 const getProductsById = (productId, done) => {
     let product = productsList.find(p => p.id === productId);
-    if (!product)
-        return done('Requested product doesn\'t exist..!');
-    return done(null, JSON.stringify(product));
+    if (!product) {
+        done('Requested product doesn\'t exist..!');
+        return null;
+    }
+    done(null, JSON.stringify(product));
+    return JSON.stringify(product);
 }
 
 const saveProduct = (newProduct, done) => {
     let entry = productsList.find(p => p.id === newProduct.id);
-    if (!entry)
-        return done('Product already exists..!');
+    if (entry) {
+        done('Product already exists..!');
+        return null;
+    }
     productsList.push(newProduct);
-    return done(null, JSON.stringify(productsList));
+    done(null, JSON.stringify(productsList));
+    return JSON.stringify(productsList);
 }
 
 const updateProduct = (productId, updateData, done) => {
-    let index = productsList.findIndex(p => p.id === productId);
-    if (index === -1)
+    let index = productsList.find(p => p.id === productId);
+    if (!index) {
         done('Requested product doesn\'t exist..!');
+        return null;
+    }
 
-    let newObj = {...productsList[index], updateData};
-    let updatedProductList = productsList.splice(index, 1, newObj);
-    done(null, JSON.stringify(updatedProductList));
+    let newobj = JSON.parse(updateData);
+
+    index = {"id": productId};
+    index += updateData;
+    done(null, JSON.stringify(productsList));
+    return JSON.stringify(productsList)
 }
 
 const deleteProduct = (productId, done) => {
     let index = productsList.findIndex(p => p.id === productId);
-    if (index === -1)
+    if (index === -1) {
         done('Requested product doesn\'t exist..!');
+        return null;
+    }
 
     done(null, JSON.stringify(productsList.splice(index, 1)));
+    return JSON.stringify(productsList.splice(index, 1));
 }
 
 
