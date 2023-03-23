@@ -1,8 +1,8 @@
 # Problem Statement - Product​
 
-Ecommerce is the buying and selling of products on the internet. The products that are sold on any e-commerce website are the core of the business. Consumers add products to their shopping carts, pay the amount online and buy the products. Sometimes, at the check-out, a consumer may delete a product from the cart, update the count of the products, etc. The application should be able to handle all the consumer requirements to give them a good shopping experience.
+In this project, I used vanilla JS to build a comprehensive REST API to control resource data. I represented the resource as a json-formatted array of products. This REST API offers the client the ability to add new products, retrieve all of the products that are accessible, retrieve a particular product by id, delete a product, and update the details of a particular product.
 
-Build a REST API using vanilla JS to manage the product details and add new products, fetch all the products available, fetch a specific product by id, delete a product and update the details of a specific product.
+Ecommerce is the buying and selling of products on the internet. The products that are sold on any e-commerce website are the core of the business. Consumers add products to their shopping carts, pay the amount online and buy the products. Sometimes, at the check-out, a consumer may delete a product from the cart, update the count of the products, etc. The application should be able to handle all the consumer requirements to give them a good shopping experience.
 
 ## Tasks
 
